@@ -2,6 +2,7 @@ import { AccountCircle } from "@mui/icons-material"
 import { Box, Button, Card, CardActions, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, InputAdornment, TextField, Typography } from "@mui/material"
 import { useState } from "react";
 import { useAppDispatch } from "../../store/hooks";
+import { loginUser, LoginUser } from "../../store/modules/login/LoginSlice";
 import { CreateUser, createUser } from "../../store/modules/user/UserSlice";
 
 export const Login: React.FC = () => {
@@ -11,6 +12,9 @@ export const Login: React.FC = () => {
     const [name, setName] = useState<string>("");
     const [pass, setPass] = useState<string>("");
     const [rPass, setRpass] = useState<string>("");
+
+    const [nameLogin, setNameLogin] = useState<string>("");
+    const [passLogin, setPassLogin] = useState<string>("");
 
 
     const [open, setOpen] = useState(false);
@@ -29,12 +33,24 @@ export const Login: React.FC = () => {
             pass: pass,
             Rpass: rPass
         }
-        //console.log(usuario)
+
         setName("");
         setPass("");
         setRpass("");
 
         dispatch(createUser(usuario));
+    }
+
+    function logar(){
+        const login: LoginUser = {
+            name: nameLogin,
+            pass: passLogin,
+        }
+        
+        setNameLogin("");
+        setPassLogin("");
+
+        dispatch(loginUser(login));
     }
 
     return(
@@ -81,6 +97,8 @@ export const Login: React.FC = () => {
                                         variant='outlined' 
                                         label='E-mail' 
                                         type='email'
+                                        value={nameLogin}
+                                        onChange={(e) => setNameLogin(e.target.value)}
                                         sx={{ 
                                         width: "500px", 
                                         marginTop: "40px" 
@@ -99,6 +117,8 @@ export const Login: React.FC = () => {
                                         variant='outlined' 
                                         label='Senha' 
                                         type='password'
+                                        value={passLogin}
+                                        onChange={(e) => setPassLogin(e.target.value)}
                                         sx={{ 
                                         width: "500px", 
                                         marginTop: "20px" 
@@ -107,6 +127,7 @@ export const Login: React.FC = () => {
                                 <Grid item xs={12}>
                                     <Button 
                                         variant='contained' 
+                                        onClick={() => logar()}
                                         sx={{ 
                                         width: "280px", 
                                         marginTop: "50px", 
