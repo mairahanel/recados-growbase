@@ -6,7 +6,7 @@ import { CreateUser, createUser } from "../../store/modules/user/UserSlice";
 
 export const Login: React.FC = () => {
 
-    //const dispatch = useAppDispatch();
+    const dispatch = useAppDispatch();
  
     const [name, setName] = useState<string>("");
     const [pass, setPass] = useState<string>("");
@@ -29,12 +29,12 @@ export const Login: React.FC = () => {
             pass: pass,
             Rpass: rPass
         }
-        console.log(usuario)
+        //console.log(usuario)
         setName("");
         setPass("");
         setRpass("");
 
-        //dispatch(createUser(usuario));
+        dispatch(createUser(usuario));
     }
 
     return(
