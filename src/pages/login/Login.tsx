@@ -1,5 +1,5 @@
 import { AccountCircle } from "@mui/icons-material"
-import { Box, Button, Card, CardActions, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, InputAdornment, TextField, Typography } from "@mui/material"
+import { Box, Button, Card, CardActions, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, InputAdornment, Paper, TextField, Typography } from "@mui/material"
 import { useState } from "react";
 import { useAppDispatch } from "../../store/hooks";
 import { loginUser, LoginUser } from "../../store/modules/login/LoginSlice";
@@ -54,7 +54,7 @@ export const Login: React.FC = () => {
     }
 
     return(
-        <Grid container component='main' sx={{ backgroundColor: "#dda0dd" }}>
+        <Grid container component='main' sx={{ backgroundColor: "#363636" /* "#dda0dd" */ }}>
             <Grid item 
                 xs={12} 
                 height='100vh' 
@@ -71,6 +71,7 @@ export const Login: React.FC = () => {
                     justifyContent: "center", 
                     height: "500px", 
                     width: "600px",
+                    backgroundColor: "#D3D3D3"
                     }}>
                         <Grid container 
                         height='50vh' 
@@ -84,7 +85,7 @@ export const Login: React.FC = () => {
                         justifyContent: "center", 
                         flexDirection: "row", 
                         alignItems: "start" }}>
-                            <Typography variant='h5'>Faça seu login!</Typography>
+                            <Typography variant='h4'>Faça seu login!</Typography>
                         </Grid>
                         <CardActions>
                             <Grid container 
@@ -131,8 +132,8 @@ export const Login: React.FC = () => {
                                         sx={{ 
                                         width: "280px", 
                                         marginTop: "50px", 
-                                        backgroundColor: "#00FF7F", 
-                                        color: "black" 
+                                        backgroundColor: "#4169E1" /* "#00FF7F" */, 
+                                        color: "white" 
                                         }}>Entrar</Button>
                                 </Grid>
                                 <Grid item 
@@ -195,7 +196,8 @@ export const Login: React.FC = () => {
                 </DialogContent>
                 <DialogActions>
                 <Button variant='outlined' color='error' onClick={closeModal}>Fechar</Button>
-                <Button variant='contained' color='success' onClick={()=> criarUsuario()} >Salvar</Button>
+                <Button variant='contained' onClick={()=> criarUsuario()} 
+                    sx={{ backgroundColor: "#4169E1" }}>Salvar</Button>
                 </DialogActions>
                 </Dialog>
             </div>
