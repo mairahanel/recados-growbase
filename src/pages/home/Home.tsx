@@ -4,9 +4,17 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import { useState } from "react";
+import { useAppDispatch } from "../../store/hooks";
+import { createTarefa, CreateTarefa } from "../../store/modules/tarefas/TarefasSlice";
 
 
 export const Home: React.FC = () => {
+
+    const dispatch = useAppDispatch();
+
+    const[ descricao, setDescricao] = useState<string>("");
+    const[ detalhamento, setDetalhamento] = useState<string>("");
+
 
     //MODAIS
     const [openAdd, setOpenAdd] = useState(false);
@@ -27,6 +35,18 @@ export const Home: React.FC = () => {
     const closeModalEdit = () => {
         setOpenEdit(false);
     };
+
+    function addTarefa() {
+        const tarefa: CreateTarefa = {
+            description: descricao,
+            detail: detalhamento,
+            token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJJZCI6IjI3ZTRlODY2LWQwY2YtNDhiYS1iZDMyLTMxZDg2NTNkN2VkMCIsInVzZXJOYW1lIjoibWFqbzg4OEBnbWFpbC5jb20ifSwiaWF0IjoxNjYyMzM1OTc4LCJleHAiOjE2NjIzMzk1Nzh9.y-zU8J48GLRM_IIoloeQQhiaXJh2pAxgnaedlnfYRAA"
+        }
+
+        //console.log(tarefa);
+
+        dispatch(createTarefa(tarefa));
+    }
 
     return(
             <Box>
@@ -86,6 +106,8 @@ export const Home: React.FC = () => {
                         label="Descrição"
                         fullWidth
                         variant="outlined"
+                        value={descricao}
+                        onChange={(e) => setDescricao(e.target.value)}
                     />
                     <TextField
                         autoFocus
@@ -93,11 +115,13 @@ export const Home: React.FC = () => {
                         label="Detalhamento"
                         fullWidth
                         variant="outlined"
+                        value={detalhamento}
+                        onChange={(e) => setDetalhamento(e.target.value)}
                     />
                     </DialogContent>
                     <DialogActions>
                     <Button onClick={closeModalAdd}>Cancelar</Button>
-                    <Button variant="contained" onClick={closeModalAdd}>Salvar</Button>
+                    <Button variant="contained" onClick={() => addTarefa()}>Salvar</Button>
                     </DialogActions>
                 </Dialog>
 
